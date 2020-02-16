@@ -156,7 +156,52 @@ class XiaomiRoborockVacuum {
       this.services.wohnzimmer
       .getCharacteristic(Characteristic.On)
       .on('get', (cb) => callbackify(() => this.getCleaning(), cb))
+      .on('set', (newState, cb) => callbackify(() => this.setCleaningRoom(newState, 17), cb))
+      .on('change', (oldState, newState) => {
+        this.changedPause(newState);
+      });
+
+      this.services.wohnzimmer = new Service.Switch(`${this.config.name} Schlafzimmer`,'roomService2');
+      this.services.wohnzimmer
+      .getCharacteristic(Characteristic.On)
+      .on('get', (cb) => callbackify(() => this.getCleaning(), cb))
+      .on('set', (newState, cb) => callbackify(() => this.setCleaningRoom(newState, 16), cb))
+      .on('change', (oldState, newState) => {
+        this.changedPause(newState);
+      });
+
+      this.services.wohnzimmer = new Service.Switch(`${this.config.name} Büro`,'roomService3');
+      this.services.wohnzimmer
+      .getCharacteristic(Characteristic.On)
+      .on('get', (cb) => callbackify(() => this.getCleaning(), cb))
+      .on('set', (newState, cb) => callbackify(() => this.setCleaningRoom(newState, 3), cb))
+      .on('change', (oldState, newState) => {
+        this.changedPause(newState);
+      });
+
+      this.services.wohnzimmer = new Service.Switch(`${this.config.name} Flur`,'roomService4');
+      this.services.wohnzimmer
+      .getCharacteristic(Characteristic.On)
+      .on('get', (cb) => callbackify(() => this.getCleaning(), cb))
       .on('set', (newState, cb) => callbackify(() => this.setCleaningRoom(newState, 4), cb))
+      .on('change', (oldState, newState) => {
+        this.changedPause(newState);
+      });
+
+      this.services.wohnzimmer = new Service.Switch(`${this.config.name} Küche`,'roomService5');
+      this.services.wohnzimmer
+      .getCharacteristic(Characteristic.On)
+      .on('get', (cb) => callbackify(() => this.getCleaning(), cb))
+      .on('set', (newState, cb) => callbackify(() => this.setCleaningRoom(newState, 6), cb))
+      .on('change', (oldState, newState) => {
+        this.changedPause(newState);
+      });
+
+      this.services.wohnzimmer = new Service.Switch(`${this.config.name} Badezimmer`,'roomService6');
+      this.services.wohnzimmer
+      .getCharacteristic(Characteristic.On)
+      .on('get', (cb) => callbackify(() => this.getCleaning(), cb))
+      .on('set', (newState, cb) => callbackify(() => this.setCleaningRoom(newState, 5), cb))
       .on('change', (oldState, newState) => {
         this.changedPause(newState);
       });
