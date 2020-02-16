@@ -150,6 +150,17 @@ class XiaomiRoborockVacuum {
       // TODO: Add 'change' status?
     }
 
+      this.services.wohnzimmer = new Service.Switch(`${this.config.name} Wohnzimmersaugen`,'notificationButtonService');
+      this.Service.wohnzimmer = '001100111-0000-0000-0000-000000000000';
+      this.services.wohnzimmer
+      .getCharacteristic(Characteristic.On)
+      .on('get', (cb) => callbackify(() => this.getCleaning(), cb))
+      .on('set', console.log("Wohnzimmer"))//(newState, cb) => callbackify(() => this.setCleaningRoom(newState, 4), cb))
+      .on('change', (oldState, newState) => {
+        this.changedPause(newState);
+      });
+
+
     if (this.config.dock) {
       this.services.dock = new Service.OccupancySensor(`${this.config.name} Dock`);
       this.services.dock
@@ -503,6 +514,23 @@ class XiaomiRoborockVacuum {
       if (state && !this.isCleaning) { // Start cleaning
         this.log.info(`ACT setCleaning | ${this.model} | Start cleaning, not charging.`);
         await this.device.activateCleaning();
+      } else if (!state) { // Stop cleaning
+        this.log.info(`ACT setCleaning | ${this.model} | Stop cleaning and go to charge.`);
+        await this.device.activateCharging(); // Charging works for 1st, not for 2nd
+      }
+    } catch (err) {
+      this.log.error(`ERR setCleaning | ${this.model} | Failed to set cleaning to ${state}`, err);
+      throw err;
+    }
+  }
+  
+  async setCleaningRoom(state, room) {
+    await this.ensureDevice('setCleaning');
+
+    try {
+      if (state && !this.isCleaning) { // Start cleaning
+        this.log.info(`ACT setCleaning | ${this.model} | Start cleaning, not charging.`);
+        await this.device.call('app_segment_clean', [room]);
       } else if (!state) { // Stop cleaning
         this.log.info(`ACT setCleaning | ${this.model} | Stop cleaning and go to charge.`);
         await this.device.activateCharging(); // Charging works for 1st, not for 2nd
