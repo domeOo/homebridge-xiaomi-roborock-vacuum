@@ -152,6 +152,7 @@ class XiaomiRoborockVacuum {
 
 
     if (this.config.room) {
+     
       this.services.wohnzimmer = new Service.Switch(`${this.config.name} Wohnzimmersaugen`,'roomService');
       this.services.wohnzimmer
       .getCharacteristic(Characteristic.On)
@@ -161,8 +162,8 @@ class XiaomiRoborockVacuum {
         this.changedPause(newState);
       });
 
-      this.services.wohnzimmer = new Service.Switch(`${this.config.name} Schlafzimmer`,'roomService2');
-      this.services.wohnzimmer
+      this.services.schlafzimmer = new Service.Switch(`${this.config.name} Schlafzimmer`,'roomService2');
+      this.services.schlafzimmer
       .getCharacteristic(Characteristic.On)
       .on('get', (cb) => callbackify(() => this.getCleaning(), cb))
       .on('set', (newState, cb) => callbackify(() => this.setCleaningRoom(newState, 16), cb))
@@ -170,8 +171,8 @@ class XiaomiRoborockVacuum {
         this.changedPause(newState);
       });
 
-      this.services.wohnzimmer = new Service.Switch(`${this.config.name} Büro`,'roomService3');
-      this.services.wohnzimmer
+      this.services.büro = new Service.Switch(`${this.config.name} Büro`,'roomService3');
+      this.services.büro
       .getCharacteristic(Characteristic.On)
       .on('get', (cb) => callbackify(() => this.getCleaning(), cb))
       .on('set', (newState, cb) => callbackify(() => this.setCleaningRoom(newState, 3), cb))
@@ -179,8 +180,8 @@ class XiaomiRoborockVacuum {
         this.changedPause(newState);
       });
 
-      this.services.wohnzimmer = new Service.Switch(`${this.config.name} Flur`,'roomService4');
-      this.services.wohnzimmer
+      this.services.flur = new Service.Switch(`${this.config.name} Flur`,'roomService4');
+      this.services.flur
       .getCharacteristic(Characteristic.On)
       .on('get', (cb) => callbackify(() => this.getCleaning(), cb))
       .on('set', (newState, cb) => callbackify(() => this.setCleaningRoom(newState, 4), cb))
@@ -188,8 +189,8 @@ class XiaomiRoborockVacuum {
         this.changedPause(newState);
       });
 
-      this.services.wohnzimmer = new Service.Switch(`${this.config.name} Küche`,'roomService5');
-      this.services.wohnzimmer
+      this.services.küche = new Service.Switch(`${this.config.name} Küche`,'roomService5');
+      this.services.küche
       .getCharacteristic(Characteristic.On)
       .on('get', (cb) => callbackify(() => this.getCleaning(), cb))
       .on('set', (newState, cb) => callbackify(() => this.setCleaningRoom(newState, 6), cb))
@@ -197,8 +198,8 @@ class XiaomiRoborockVacuum {
         this.changedPause(newState);
       });
 
-      this.services.wohnzimmer = new Service.Switch(`${this.config.name} Badezimmer`,'roomService6');
-      this.services.wohnzimmer
+      this.services.badezimmer = new Service.Switch(`${this.config.name} Badezimmer`,'roomService6');
+      this.services.badezimmer
       .getCharacteristic(Characteristic.On)
       .on('get', (cb) => callbackify(() => this.getCleaning(), cb))
       .on('set', (newState, cb) => callbackify(() => this.setCleaningRoom(newState, 5), cb))
