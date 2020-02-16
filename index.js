@@ -151,7 +151,7 @@ class XiaomiRoborockVacuum {
     }
 
       this.services.wohnzimmer = new Service.Switch(`${this.config.name} Wohnzimmersaugen`,'notificationButtonService');
-      this.Service.wohnzimmer = '001100111-0000-0000-0000-000000000000';
+      this.services.wohnzimmer = '001100111-0000-0000-0000-000000000000';
       this.services.wohnzimmer
       .getCharacteristic(Characteristic.On)
       .on('get', (cb) => callbackify(() => this.getCleaning(), cb))
