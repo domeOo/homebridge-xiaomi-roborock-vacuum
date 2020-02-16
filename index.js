@@ -150,6 +150,8 @@ class XiaomiRoborockVacuum {
       // TODO: Add 'change' status?
     }
 
+
+    if (this.config.room) {
       this.services.wohnzimmer = new Service.Switch(`${this.config.name} Wohnzimmersaugen`);
       this.services.wohnzimmer.UUID = '001100111-0000-0000-0000-000000000000';
       this.services.wohnzimmer
@@ -159,8 +161,9 @@ class XiaomiRoborockVacuum {
       .on('change', (oldState, newState) => {
         this.changedPause(newState);
       });
+    }
 
-
+    
     if (this.config.dock) {
       this.services.dock = new Service.OccupancySensor(`${this.config.name} Dock`);
       this.services.dock

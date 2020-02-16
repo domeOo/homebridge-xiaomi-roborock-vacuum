@@ -21,6 +21,12 @@
         "type": "string",
         "required": true
       },
+      "room": {
+        "title": "Room",
+        "type": "boolean",
+        "required": true,
+        "default":false
+      },
       "waterBox": {
         "title": "Enable the Water Box mode (beta)",
         "type": "boolean",
