@@ -142,7 +142,7 @@ class XiaomiRoborockVacuum {
       .on('get', (cb) => callbackify(() => this.getBatteryLow(), cb));
 
     if (this.config.pause) {
-      this.services.pause = new Service.Switch(`${this.config.name} Pause`);
+      this.services.pause = new Service.Switch(`${this.config.name} Pause`,'pauseService');
       this.services.pause
         .getCharacteristic(Characteristic.On)
         .on('get', (cb) => callbackify(() => this.getPauseState(), cb))
@@ -152,7 +152,7 @@ class XiaomiRoborockVacuum {
 
 
     if (this.config.room) {
-      this.services.wohnzimmer = new Service.Switch(`${this.config.name} Wohnzimmersaugen`);
+      this.services.wohnzimmer = new Service.Switch(`${this.config.name} Wohnzimmersaugen`,'roomService');
       this.services.wohnzimmer
       .getCharacteristic(Characteristic.On)
       .on('get', (cb) => callbackify(() => this.getCleaning(), cb))
